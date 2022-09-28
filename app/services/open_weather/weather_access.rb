@@ -5,21 +5,23 @@ class OpenWeather::WeatherAccess
     @api_key = api_key
   end
 
-  # Pyongyang lat=39.0392&lon=125.7625
-  # ADD USE CACHE INDICATOR
   def get_weather_raw(lat, lon)
     url = "https://api.openweathermap.org/data/3.0/onecall?lat=#{lat}&lon=#{lon}8&exclude=daily,alerts&appid=#{@api_key}"
+    cached = true # Set initial "result retrived from cache" value
     cache_key = "#{lat}_#{lon}"
     weather = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
-      puts "Url not previously cached"
+      cached = false # We just got it, so it's not cached
       response = Faraday.get(url, {'Accept' => 'application/json'})
-      JSON.parse(response.body, symbolize_names: true) # [:current]
-    end
+      JSON.parse(response.body, symbolize_names: true)
+     end
+    weather[:cached] = cached # Add the cached value to the response
+    weather
   end
 
   def get_weather(lat, lon)
     raw_weather = get_weather_raw(lat, lon)
     converted_weather = {
+      cached: raw_weather[:cached],
       lat: lat,
       lon: lon,
       timezone: raw_weather[:timezone],
