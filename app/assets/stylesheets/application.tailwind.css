@@ -11,3 +11,9 @@
 }
 
 */
+
+@layer base {
+  div {
+    @apply bg-teal-100 mx-10;
+  }
+}

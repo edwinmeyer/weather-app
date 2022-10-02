@@ -1,0 +1,32 @@
+<%# TODO: Fix this mix of Tailwind & native CSS styling %>
+<div class="min-w-full p-4 m-4 ...">
+  <div class="font-bold text-4xl justify-center">Weather Information</div>
+ 
+  <% if @weather_info[:cod] %>
+  <div class="text-2xl" style="color:red">Error code: <%= @weather_info[:cod]%><br/>
+    Message: <%= @weather_info[:message] %>
+  </div>
+
+  <% else %>
+    <p style="font-style:italic; font-weight:500" class="text-2xl">The result is <%= @weather_info[:cached] ? '' : 'not ' %>from the cache</p>
+    <p><i>Latitude:</i> <%= @weather_info[:lat] %></p>
+    <p><i>Longitude: </i><%= @weather_info[:lon] %></p>
+    <p><i>Timezone: </i><%= @weather_info[:timezone] %></p>
+    <p><i>Epoch Time: </i><%= @weather_info[:epoch_time] %> &mdash; # seconds since 1/1/1970 UTC</p>
+    <p><i>Date & Time: </i><%= @weather_info[:date_time] %> &mdash; Local, not location time</p>
+    <p><i>Weather capsule: </i><%= @weather_info[:weather_brief] %></p>
+    <p><i>Weather description: </i><%= @weather_info[:weather_desc] %></p>
+    <p><i>Temp Centigrade: </i><%= @weather_info[:temp_c] %></p>
+    <p><i>Temp Fahrenheit: </i><%= @weather_info[:temp_f] %></p>
+  <% end %>
+  <br/>
+
+  <div class="font-bold text-2xl">Weather for a Different Location</div>
+  <%= form_tag('/get_weather', method: 'get') do %>
+    <%= label_tag(:lat, "Latitude") %> &nbsp;&nbsp;
+    <%= text_field_tag(:lat) %><br/>
+    <%= label_tag(:lon, "Longitude") %>
+    <%= text_field_tag(:lon) %><br/><br/>
+    <%= submit_tag("Get Weather", class: 'button', style: "font-size: 25px; background-color: lightblue") %>
+  <% end %>
+</div>

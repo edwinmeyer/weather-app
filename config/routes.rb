@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resource :get_weather, only: [:show]
+
+   # Defines the root path route ("/")
+  root "get_weathers#show", lat: 41.8781, lon: -87.6298 # Chicago, IL
 end
