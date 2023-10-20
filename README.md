@@ -53,8 +53,10 @@ malformed - as well as for erroneous entries could be added. End-to-end tests co
 view displays correctly.
 
 ## Screenshots
-Several screenshots of normal and error cases are stored in the log directory (for want of a better location).
-
+Screenshots of normal and error cases are stored in the public directory: burlington-vt-by-zipcode-uncached.png, 
+burlington-vt-by-zipcode-cached.png, burlington-vt-by-coords-cached.png, invalid-zipcode.png, and 
+longitude-in-atlantic-ocean.png   
+Access them as e.g. http://localhost:3000/burlington-vt-by-coords-cached.png
 ## TODOs
 The app has a few TODOs sprinkled though the code. Given enough time, these could be dealt with, as well as numerous 
 other mostly minor issues. Perhaps the biggest deficiency is the semi-disconnect between search by coordinates and by 
