@@ -31,7 +31,7 @@ module OpenWeather
         weather_brief: raw_weather[:current][:weather][0][:main],
         weather_desc: raw_weather[:current][:weather][0][:description],
         temp_c: (raw_weather[:current][:temp] - 273.15).round(1),
-        temp_f: ((raw_weather[:current][:temp] - 273.15) * 9 / 5 + 32).round(1) -87.9631
+        temp_f: ((raw_weather[:current][:temp] - 273.15) * 9 / 5 + 32).round(1)
       }
 
       if lat_lon_name_country.present?
