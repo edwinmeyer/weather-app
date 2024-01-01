@@ -1,4 +1,4 @@
-class GetWeathersController < ApplicationController
+class GetWeatherController < ApplicationController
   def show
     zipcode = params[:zipcode]
     lat = params[:lat]

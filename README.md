@@ -34,14 +34,14 @@ Note that the locale name will be returned only if a zipcode is entered; not for
 One interesting aspect of the app is that it is structured to allow different vendors' APIs to be used to obtain
 weather data, although it is still skeletal in nature and only the openweathermap.org APIs are implemented. Currently
 hardwired as 'Open Weather', the view could have an input field to set the 'service' param to a different service.
-This is implemented by having the GetWeathersController make a call to WeatherSelector.get_service_class with the
+This is implemented by having the GetWeatherController make a call to WeatherSelector.get_service_class with the
 service name. It returns the class name of the proper service (here OpenWeather::WeatherAccess). The WeatherAccess
 class implements the service functionality. For Open Weather, its pathname is
 app/services/open_weather/weather_access.rb
 
 Except for the fact there are no models and no database (the volatile cache is the only data store that preserves data 
 across requests), 'weather-app' is fairly standard. A request to the get_weather endpoint is routed to
-GetWeathersController, which calls WeatherSelector.get_service_class(service) to get the class name (here 
+GetWeatherController, which calls WeatherSelector.get_service_class(service) to get the class name (here 
 OpenWeather::WeatherAccess), instantiate it, then call its get_weather method with input coordinates and zipcode. 
 get_weather does all the work, then returns output data to the controller. Then the controller invokes the ERB view.
 
